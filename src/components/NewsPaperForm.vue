@@ -6,10 +6,12 @@ const emit = defineEmits(["updateJournal"]);
 const journalData = ref({
   header: "",       // Assurez-vous que chaque propriété est définie
   art1: {
-    title: ""
+    title: "Exemple article 1",
+    body: "Détails article 1 avev exemple "
   },
   art2: {
-    title: ""
+    title: "",
+    body: ""
   },
   journalName: "TITRE DU JOURNAL"
 });
