@@ -10,15 +10,11 @@ const journalData = ref({
     body: "Détails article 1 avev exemple "
   },
   art2: {
-    title: "",
+    title: "Test",
     body: ""
   },
   journalName: "TITRE DU JOURNAL"
 });
-
-onMounted(() => {
-  emit('updateJournal', journalData);
-})
 
 watch(journalData, (newValue) => {
   emit('updateJournal', newValue);
@@ -38,50 +34,54 @@ const changeImage = (imageUrl) => {
 </script>
 
 <template>
-  <form class="flex flex-col">
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        Username
-      </label>
-      <input type="text"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             v-model="journalData.header" placeholder="Header">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        Username
-      </label>
-      <input type="text"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             v-model="journalData.art1.title" placeholder="Art1 Title">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        Username
-      </label>
-      <input type="text"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             v-model="journalData.art2.title" placeholder="Art2 Title">
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        Username
-      </label>
-      <input type="text"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             v-model="journalData.journalName" placeholder="Journal Name">
-    </div>
+  <div class="flex flex-col justify-center items-center">
+    <form class="flex flex-col w-3/4">
+      <h3 class="text-6xl font-black text-gothic uppercase mb-4">Créez votre journal</h3>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Nom du journal
+        </label>
+        <input type="text"
+               class="input-form"
+               v-model="journalData.journalName" placeholder="Journal Name">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          En-tête
+        </label>
+        <input type="text"
+               class="input-form"
+               v-model="journalData.header" placeholder="En-tête">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Titre du premier article
+        </label>
+        <input type="text"
+               class="input-form"
+               v-model="journalData.art1.title" placeholder="Art1 Title">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+          Premier article
+        </label>
+        <textarea
+               class="input-form"
+               v-model="journalData.art1.body"
+               placeholder="Art1 Title"></textarea>
+      </div>
 
-    <div class="image-list mb-4">
-      <div
-          v-for="image in images"
-          :key="image"
-          class="thumbnail"
-          :style="{ backgroundImage: `url(${image})` }"
-          @click="changeImage(image)"
-      ></div>
-    </div>
-  </form>
+      <div class="image-list mb-4">
+        <div
+            v-for="image in images"
+            :key="image"
+            class="thumbnail"
+            :style="{ backgroundImage: `url(${image})` }"
+            @click="changeImage(image)"
+        ></div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <style scoped>
@@ -105,5 +105,14 @@ const changeImage = (imageUrl) => {
 
 .thumbnail:hover {
   transform: scale(1.1);
+}
+
+.input-form {
+  @apply appearance-none w-full p-4 bg-slate-700;
+  color: white;
+}
+
+.input-form:focus {
+  @apply border border-slate-700
 }
 </style>

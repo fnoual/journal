@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import {onMounted, ref, watch} from "vue";
 
 const props = defineProps(['journalData'])
 
@@ -22,12 +22,12 @@ const now = ref(new Date().toLocaleDateString())
         </div>
         <div class="articles-aside">
           <div class="card">
-            <div class="card-header">
-              {{ journalData.art1.title }}
+            <div class="card-header text-gothic">
+              {{ journalData.art1?.title }}
             </div>
             <div class="card-body">
               <span class="body">
-                {{ journalData.art1.body }}
+                {{ journalData.art1?.body }}
               </span>
             </div>
           </div>
@@ -42,7 +42,7 @@ const now = ref(new Date().toLocaleDateString())
 #newspaper {
   height: 1128px;
   width: 800px;
-
+  background-color: white;
 }
 
 .journalTitle {
@@ -61,18 +61,15 @@ const now = ref(new Date().toLocaleDateString())
   height: 980px;
 }
 
-.demo {
-  font-weight: 700;
-}
-
 .articles-aside {
-  @apply pl-2
+  @apply pl-2;
+  width: 20%;
 }
 .card {
   @apply border-b pb-2
 }
 
 .card-header {
-  @apply font-semibold uppercase text-gray-400 text-gothic
+  @apply font-semibold uppercase text-gray-400
 }
 </style>
