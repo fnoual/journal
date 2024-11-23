@@ -4,16 +4,24 @@ import {onMounted, ref, watch} from "vue";
 const emit = defineEmits(["updateJournal"]);
 
 const journalData = ref({
-  header: "",       // Assurez-vous que chaque propriété est définie
+  header: "",
   art1: {
-    title: "Exemple article 1",
-    body: "Détails article 1 avev exemple "
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
   },
   art2: {
-    title: "Test",
-    body: ""
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
   },
-  journalName: "TITRE DU JOURNAL"
+  art3: {
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+  },
+  art4: {
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+  },
+  journalName: "Titre Du Journal"
 });
 
 watch(journalData, (newValue) => {
@@ -21,24 +29,63 @@ watch(journalData, (newValue) => {
 }, {deep: true});
 
 const images = [
-  "algiers.jpg",
-  "door.jpg",
-  "ny.jpg",
-  "oran.jpg",
-  "port.jpg",
+  "1.jpg",
+  "2.jpg",
+  "3.jpg",
+  "4.jpg",
+  "5.jpg",
+  "6.jpg",
+  "7.jpg",
+  "8.jpg",
 ].map(img => new URL(`../assets/photos/${img}`, import.meta.url).href);
 
-const changeImage = (imageUrl) => {
-  journalData.value.image = imageUrl;
+const fonts = [
+  {
+    "name" :"Old London",
+    "label" :"Gothique 1",
+  },
+  {
+    "name" :"Enchanted Land",
+    "label" :"Gothique 1",
+  },
+  {
+    "name" :"Cloister Black",
+    "label" :"Gothique 2",
+  },
+  {
+    "name" :"Deutsch Gothic",
+    "label" :"Gras",
+  },
+  {
+    "name" :"Typewriter",
+    "label" :"Machine a écrire",
+  },
+]
+
+const changeImage = (imageUrl, imageNumber) => {
+  switch (imageNumber) {
+    case 1:
+      journalData.value.image1 = imageUrl;
+      break;
+    case 2:
+      journalData.value.image2 = imageUrl;
+      break;
+    case 3:
+      journalData.value.image3 = imageUrl;
+      break;
+    default:
+      console.error(`Invalid imageNumber: ${imageNumber}`);
+  }
 };
 </script>
 
 <template>
   <div class="flex flex-col justify-center items-center">
     <form class="flex flex-col w-3/4">
-      <h3 class="text-6xl font-black text-gothic uppercase mb-4">Créez votre journal</h3>
+      <img src="@/assets/photos/header.png" alt="">
+      <h3 class="text-6xl text-white text-gothic uppercase mb-4">Créez votre journal</h3>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        <label class="block text-white text-sm font-bold mb-2" for="username">
           Nom du journal
         </label>
         <input type="text"
@@ -46,7 +93,7 @@ const changeImage = (imageUrl) => {
                v-model="journalData.journalName" placeholder="Journal Name">
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        <label class="block text-white text-sm font-bold mb-2" for="username">
           En-tête
         </label>
         <input type="text"
@@ -54,7 +101,17 @@ const changeImage = (imageUrl) => {
                v-model="journalData.header" placeholder="En-tête">
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        <label class="block text-white text-sm font-bold mb-2" for="username">
+          Police d'écriture
+        </label>
+        <select
+               class="input-form"
+               v-model="journalData.journalFont">
+              <option v-for="font in fonts" :key="font" :value="font.name">{{ font.label }}</option>/
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-white text-sm font-bold mb-2" for="username">
           Titre du premier article
         </label>
         <input type="text"
@@ -62,24 +119,50 @@ const changeImage = (imageUrl) => {
                v-model="journalData.art1.title" placeholder="Art1 Title">
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        <label class="block text-white text-sm font-bold mb-2" for="username">
           Premier article
         </label>
         <textarea
-               class="input-form"
-               v-model="journalData.art1.body"
-               placeholder="Art1 Title"></textarea>
+            class="input-form"
+            v-model="journalData.art1.body"
+            placeholder="Art1 Title"></textarea>
       </div>
 
-      <div class="image-list mb-4">
-        <div
-            v-for="image in images"
-            :key="image"
-            class="thumbnail"
-            :style="{ backgroundImage: `url(${image})` }"
-            @click="changeImage(image)"
-        ></div>
+      <div class="flex flex-col gap-2 mb-4">
+        <div class="flex flex-row w-full items-between">
+          <div
+              v-for="image in images"
+              :key="image"
+              class="thumbnail"
+              :style="{ backgroundImage: `url(${image})` }"
+              @click="changeImage(image, 1)"
+          ></div>
+        </div>
+        <div class="flex flex-row w-full items-between">
+          <div
+              v-for="image in images"
+              :key="image"
+              class="thumbnail"
+              :style="{ backgroundImage: `url(${image})` }"
+              @click="changeImage(image, 2)"
+          ></div>
+        </div>
+        <div class="flex flex-row w-full items-between">
+          <div
+              v-for="image in images"
+              :key="image"
+              class="thumbnail"
+              :style="{ backgroundImage: `url(${image})` }"
+              @click="changeImage(image, 3)"
+          ></div>
+        </div>
       </div>
+
+      <button class="input-form">
+        ENREGISTRER
+      </button>
+
+      <img src="@/assets/photos/footer.png" class="self-end mt-8" style="width: 30%" alt="">
     </form>
   </div>
 </template>
@@ -108,7 +191,7 @@ const changeImage = (imageUrl) => {
 }
 
 .input-form {
-  @apply appearance-none w-full p-4 bg-slate-700;
+  @apply appearance-none w-full p-4 bg-violette-700;
   color: white;
 }
 

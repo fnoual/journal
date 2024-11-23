@@ -5,15 +5,24 @@ import NewsPaperForm from "@/components/NewsPaperForm.vue";
 
 const journalData = shallowRef({
   header: "",
+  journalFont: 'Old London',
   art1: {
-    title: "Exemple article 1",
-    body: "Détails article 1 avev exemple "
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
   },
   art2: {
-    title: "Test",
-    body: ""
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
   },
-  journalName: "TITRE DU JOURNAL"
+  art3: {
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+  },
+  art4: {
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing el",
+    body: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+  },
+  journalName: "Titre Du Journal"
 });
 
 const updateJournal = (newData) => {
@@ -22,24 +31,10 @@ const updateJournal = (newData) => {
 </script>
 
 <template>
-  <div class="app-container relative">
-    <!-- Background video -->
-    <video
-        autoplay
-        muted
-        loop
-        class="absolute top-0 left-0 w-full h-full object-cover -z-10"
-    >
-      <source src="@/assets/1722881-uhd_3840_2160_25fps.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-
-    <!-- Main content -->
-    <main class="w-full flex justify-between relative">
-      <NewsPaper class="w-1/2" :journalData="journalData" />
-      <NewsPaperForm class="w-1/2" @updateJournal="updateJournal" />
-    </main>
-  </div>
+  <main class="w-full flex justify-between relative">
+    <NewsPaper class="w-1/2" :journalData="journalData" />
+    <NewsPaperForm class="w-1/2" @updateJournal="updateJournal" />
+  </main>
 </template>
 
 <style scoped>
